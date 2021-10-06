@@ -25,7 +25,7 @@ export class WorkspaceMembers {
   @Column('int', { primary: true, name: 'UserId' })
   UserId: number;
 
-  @Column('datetime', { name: 'loggedInAt', nullable: true })
+  @Column({ name: 'loggedInAt', nullable: true })
   loggedInAt: Date | null;
 
   // --- 관계 설정 --- //
