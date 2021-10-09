@@ -3,6 +3,8 @@ import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './httpException.filter';
+import passport from 'passport';
+import session from 'express-session';
 
 declare const module: any;
 
@@ -27,6 +29,20 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+
+  app.use(
+    session({
+      resave: false,
+      saveUninitialized: false,
+      secret: process.env.COOKIE_SECRET,
+      cookie: {
+        httpOnly: true,
+      },
+    }),
+  );
+  // passport 설정
+  app.use(passport.initialize());
+  app.use(passport.session()); // session 안쓸경우 설정안해도 됨
 
   await app.listen(port);
   console.log(`Listening on port ${port}`);

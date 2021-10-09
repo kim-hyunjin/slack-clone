@@ -9,15 +9,17 @@ import { ChannelsModule } from './channels/channels.module';
 import { DmsModule } from './dms/dms.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as ormconfig from '../ormconfig';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
+    TypeOrmModule.forRoot(ormconfig),
     UsersModule,
     WorkspacesModule,
     ChannelsModule,
     DmsModule,
-    TypeOrmModule.forRoot(ormconfig),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
