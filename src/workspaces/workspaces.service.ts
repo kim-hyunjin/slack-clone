@@ -12,12 +12,6 @@ export class WorkspacesService {
   constructor(
     @InjectRepository(Workspaces)
     private workspacesRepository: Repository<Workspaces>,
-    @InjectRepository(Channels)
-    private channelsRepository: Repository<Channels>,
-    @InjectRepository(WorkspaceMembers)
-    private workspaceMembersRepository: Repository<WorkspaceMembers>,
-    @InjectRepository(ChannelMembers)
-    private channelMembersRepository: Repository<ChannelMembers>,
     @InjectRepository(Users)
     private usersRepository: Repository<Users>,
     private connection: Connection,
@@ -93,6 +87,12 @@ export class WorkspacesService {
         },
       },
     });
+    // 위와 같음
+    // this.workspacesRepository
+    //   .createQueryBuilder('workspace')
+    //   .innerJoinAndSelect('workspace.Channels', 'channels')
+    //   .where('url = :url', { url })
+    //   .getOne();
     const user = await this.usersRepository.findOne({ where: { email } });
     if (!user) {
       return null;
