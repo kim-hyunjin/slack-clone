@@ -1,2 +1,2 @@
 # Slack Clone
-using NestJs, TypeORM
+using TypeScript, NestJs, TypeORM
