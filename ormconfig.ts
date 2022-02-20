@@ -8,15 +8,18 @@ import { Mentions } from './src/entities/Mentions';
 import { Users } from './src/entities/Users';
 import { WorkspaceMembers } from './src/entities/WorkspaceMembers';
 import { Workspaces } from './src/entities/Workspaces';
+import path from 'path';
 
 dotenv.config();
 const config: TypeOrmModuleOptions = {
-  type: 'postgres',
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
+  // type: 'postgres',
+  // host: process.env.DB_HOST,
+  // port: parseInt(process.env.DB_PORT),
+  // username: process.env.DB_USERNAME,
+  // password: process.env.DB_PASSWORD,
+  // database: process.env.DB_DATABASE,
+  type: 'sqlite',
+  database: `${path.resolve(__dirname)}/data/db.sqlite`,
   entities: [
     ChannelChats,
     ChannelMembers,

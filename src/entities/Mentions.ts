@@ -16,8 +16,10 @@ export class Mentions {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   id: number;
 
-  @Column('enum', { name: 'category', enum: ['chat', 'dm', 'system'] })
-  type: 'chat' | 'dm' | 'system';
+  // @Column('enum', { name: 'category', enum: ['chat', 'dm', 'system'] })
+  // type: 'chat' | 'dm' | 'system';
+  @Column('varchar')
+  type: string;
 
   @Column('int', { name: 'ChatId', nullable: true })
   ChatId: number | null;
