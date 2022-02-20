@@ -32,10 +32,30 @@ const getEnv = async () => {
     EventsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ConfigService],
+  providers: [
+    // 원형
+    {
+      provide: AppService, // 고유한 키, 클래스를 넣으면 클래스의 이름을 키로 사용한다.
+      useClass: AppService,
+    },
+    {
+      provide: 'CUSTOM_PROVIDER',
+      useFactory: () => {
+        return {
+          a: 'b',
+        };
+      },
+    },
+    {
+      provide: 'CUSTOM_VAL',
+      useValue: 123,
+    },
+    // 간편한 형태
+    ConfigService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes('*');
+    consumer.apply(LoggerMiddleware).forRoutes('*'); // logger 미들웨어 적용하기
   }
 }
